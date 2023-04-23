@@ -68,45 +68,62 @@ class Course {
     name: string;
     students: Student[] = [];
     instructors: Instructor[] = [];
+    departments: Department[] = [];
     constructor(name: string, id: number) {
         this.name = name;
         this.id = id;
     };
     setInstructor(instructor: Instructor) {
-        if(instructor != null){
+        if (instructor != null) {
             this.instructors.push(instructor);
             instructor.assignCourse(this) // check; pura object pass krdya automatic hogua ue to
         }
-        else{
+        else {
             throw new Error('Please select an instuctor for your course')
         }
     };
     addStudent(student: Student) {
-        if(student != null){
+        if (student != null) {
             this.students.push(student);
             student.registerForCourse(this) // check; pura object pass krdya automatic hogua ue to
         }
-        else{
+        else {
             throw new Error('Please select an instuctor for your course')
         }
-     };
-};
+    };
+    checkDepart(dep: Department) {
+        this.departments.push(dep)
+        return this.departments;
+    };
+}
 
 class Department {
-    name: string;
+    readonly name: string;
     courses: Course[] = [];
-    constructor(name: string) {
+    constructor(name: string) 
+    {
         this.name = name;
     }
-    setCourse() { };
+    addCourse(course: Course) {
+        if (course != null) {
+            this.courses.push(course);
+            course.checkDepart(this);//automatically this deparmtent is added to that course
+        }
+        else {
+            return new Error("Course must concerned with some departments")
+        }
+    };
 };
 
 const crs1 = new Course("Metaverse", 1);
 const crs2 = new Course("Probability & Stats", 2);
+const el = new Department("Elecrtonics");
+el.addCourse(crs1);//metavere in electronics
 crs1.setInstructor(ins1);
 crs2.setInstructor(ins2);
 crs1.addStudent(std1);
 crs2.addStudent(std2);
-console.log("Hi");
-console.log(ins1, ins2);
-console.log(std1, std2);
+// console.log("Hi");//check break line
+console.log(ins1, ins2); //Zia, Tauqeer
+console.log(std1, std2); //Sufyan, Meeshan
+// console.log(crs1.departments[0]);check
