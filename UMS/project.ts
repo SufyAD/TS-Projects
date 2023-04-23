@@ -59,7 +59,7 @@ class Instructor extends Person {
         this.courses.push(course)
     }
 };
-const ins1 = new Instructor("Zia", 56, 100000);
+const ins1 = new Instructor("Zia", 56, 100000); //salary is private
 const ins2 = new Instructor("Tauqeer", 49, 60000);
 
 //created course class no blueprint
@@ -102,8 +102,11 @@ class Department {
 };
 
 const crs1 = new Course("Metaverse", 1);
-const crs2 = new Course("Web & App Development", 2);
+const crs2 = new Course("Probability & Stats", 2);
 crs1.setInstructor(ins1);
+crs2.setInstructor(ins2);
+crs1.addStudent(std1);
+crs2.addStudent(std2);
+console.log("Hi");
 console.log(ins1, ins2);
-crs1.addStudent(std1)
 console.log(std1, std2);
