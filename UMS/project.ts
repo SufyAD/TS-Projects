@@ -29,7 +29,7 @@ abstract class Person {
 };
 //declared students child class
 class Student extends Person {
-    rollNumber: number;
+    readonly rollNumber: number;
     courses: Course[] = [];
     constructor(name: string, age: number, roll: number) {
         super(name, age);
@@ -49,11 +49,11 @@ const std2 = new Student("Meeshan", 20, 20091);
 class Instructor extends Person {
     // name
     // age
-    salary: number;
+    private _salary: number;
     courses: Course[] = []
     constructor(name: string, age: number, salary: number) {
         super(name, age);
-        this.salary = salary;
+        this._salary = salary;
     };
     public assignCourse(course: Course) {
         this.courses.push(course)
@@ -64,7 +64,7 @@ const ins2 = new Instructor("Tauqeer", 49, 60000);
 
 //created course class no blueprint
 class Course {
-    id: number;
+    readonly id: number;
     name: string;
     students: Student[] = [];
     instructors: Instructor[] = [];
